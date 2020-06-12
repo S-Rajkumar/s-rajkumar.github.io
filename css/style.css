@@ -1268,4 +1268,20 @@ footer .credits a {
   .back-to-top {
     bottom: 15px;
   }
+  #thanks {
+    display:none;
+  }
+}
+.text-line {
+    background-color: transparent;
+    color: #eeeeee;
+    width:100%;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #eee 1px;
+    padding: 3px 10px;
+    padding-bottom: 10px;
 }
