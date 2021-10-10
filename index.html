@@ -1,104 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>three.js webgl - simple text from json</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="./css/main.css">
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #444;
+			}
+			a {
+				color: #08f;
+			}
+		</style>
+	</head>
+	<body>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>udmnxpdu</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<meta content="udmnxpdu, udpxnmdu, ramukjar, rajkumar, engineer" name="keywords">
-	<meta content="reenegnE :-)" name="description">
-	
-	<meta property="og:title" content="Rajkumar"/>
-	<meta property="og:image" content="https://raw.githubusercontent.com/S-Rajkumar/udmnxpdu/master/images/profile_img.png"/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content="udmnxpdu"/>
-	<meta property="og:description" content="reenegnE :-)"/>
-	
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="libs/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-</head>
+		<script type="module">
 
-<body style="transform: scale(-1, 1);">
-    <div id="lead">
-        <div id="lead-content">
-            <h1>Rajkumar S</h1>
-            <h2 style="transform: scale(-1, 1);">Engineer</h2>
-		<div class="col-sm-12 social">
-                    <ul style="text-align:center">
-						<li>
-                            <a href="mailto:udmnxpdu@protonmail.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/udmnxpdu" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </li>
-						<li>
-                            <a href="https://github.com/s-rajkumar" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
-                </div>
-        </div>
-        <!-- End #lead-content -->
+			import * as THREE from './js/three.module.js';
 
-        <div id="lead-overlay"></div>
+			import { OrbitControls } from './js/OrbitControls.js';
 
-    </div>
-    <!-- End #lead -->
+			let camera, scene, renderer;
 
+			init();
+			animate();
 
-    <div id="skills">
-        <h2 class="heading">Skills</h2>
-        <ul>
-            <li>Python</li>
-			<li>C#</li>
-            <li>JavaScript</li>
-            <br /><br />
-            <li>JQuery</li>
-            <li>PHP</li>
-            <li>Dart</li>
-            <li>Basic C</li>
-            <li>Java</li>
-            <li>Shell Script</li>
-            <br /><br />
-            <li>Django</li>
-            <li>React</li>
-            <li>ODOO</li>
-			<li>Flutter</li>
-            <br /><br />
-            <li>Windows 10</li>
-			<li>Parrot OS</li>
-			<li>Networks</li>
-			<li>Security</li>
-            <br /><br />
-			<li>AI</li>
-            <li>CNN</li>
-            <li>RCNN</li>
-            <li>Mask-RCNN</li>
-            <li>Detectron2</li>
-            <br /><br />
-			<li>GIT</li>
-            <li>GitHub</li>
-			<li>AWS - EC2</li>
-			<br /><br />
-			<li>Time</li>
-			<li>Law of Conservation of Energy</li>
-        </ul>
-    </div>
-	
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 top">
-                    &#169; udmnxpdu
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
+			function init( ) {
 
+				camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set( 0, - 400, 600 );
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xf0f0f0 );
+
+				const loader = new THREE.FontLoader();
+				loader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+					const color = 0x000000;
+
+					const matDark = new THREE.LineBasicMaterial( {
+						color: color,
+						side: THREE.DoubleSide
+					} );
+
+					const matLite = new THREE.MeshBasicMaterial( {
+						color: color,
+						transparent: true,
+						opacity: 0.3,
+						side: THREE.DoubleSide
+					} );
+
+					const message = "Rajkumar S";
+
+					const shapes = font.generateShapes( message, 100 );
+
+					const geometry = new THREE.ShapeGeometry( shapes );
+
+					geometry.computeBoundingBox();
+
+					const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+
+					geometry.translate( xMid, 0, 0 );
+
+					//const text = new THREE.Mesh( geometry, matLite );
+					//text.position.z = - 150;
+					//scene.add( text );
+
+					// region engineer
+					const _color = 0x000000;
+
+					const _matDark = new THREE.LineBasicMaterial( {
+						color: _color,
+						side: THREE.DoubleSide
+					} );
+
+					const _matLite = new THREE.MeshBasicMaterial( {
+						color: _color,
+						transparent: true,
+						opacity: 0.3,
+						side: THREE.DoubleSide
+					} );
+
+					const _message = "  Engineer";
+
+					const _shapes = font.generateShapes( _message, 100 );
+
+					const _geometry = new THREE.ShapeGeometry( _shapes );
+
+					_geometry.computeBoundingBox();
+
+					const _xMid = - 0.5 * ( _geometry.boundingBox.max.x - _geometry.boundingBox.min.x );
+
+					_geometry.translate( xMid, 0, 0 );
+
+					const _text = new THREE.Mesh( _geometry, _matLite );
+					_text.position.z = - 150;
+					scene.add( _text );
+					// end region engineer
+
+					// make line shape ( N.B. edge view remains visible )
+
+					const holeShapes = [];
+
+					for ( let i = 0; i < shapes.length; i ++ ) {
+
+						const shape = shapes[ i ];
+
+						if ( shape.holes && shape.holes.length > 0 ) {
+
+							for ( let j = 0; j < shape.holes.length; j ++ ) {
+
+								const hole = shape.holes[ j ];
+								holeShapes.push( hole );
+
+							}
+
+						}
+
+					}
+
+					shapes.push.apply( shapes, holeShapes );
+
+					const lineText = new THREE.Object3D();
+
+					for ( let i = 0; i < shapes.length; i ++ ) {
+
+						const shape = shapes[ i ];
+
+						const points = shape.getPoints();
+						const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+						geometry.translate( xMid, 0, 0 );
+
+						const lineMesh = new THREE.Line( geometry, matDark );
+						lineText.add( lineMesh );
+
+					}
+
+					scene.add( lineText );
+
+				} ); //end load function
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+				const controls = new OrbitControls( camera, renderer.domElement );
+				controls.target.set( 0, 0, 0 );
+				controls.update();
+
+				window.addEventListener( 'resize', onWindowResize );
+
+			} // end init
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
 </html>
