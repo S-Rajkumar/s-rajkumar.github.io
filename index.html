@@ -14,6 +14,8 @@
 				color: #08f;
 			}
 		</style>
+		<script type="text/javascript" src="./js/main.js"></script>
+		<script type="text/javascript" src="./js/model.js"></script>
 	</head>
 	<body>
 
@@ -30,14 +32,45 @@
 
 			function init( ) {
 
-				camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
-				camera.position.set( 0, - 400, 600 );
+				camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set( 0, 0, -538 );
 
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xf0f0f0 );
 
 				const loader = new THREE.FontLoader();
 				loader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+					function generateText(TextureModel) {
+						const color = TextureModel.color;
+
+						const matDark = new THREE.LineBasicMaterial( {
+							color: color,
+							side: THREE.DoubleSide
+						} );
+
+						const matLite = new THREE.MeshBasicMaterial( {
+							color: color,
+							transparent: TextureModel.transparent,
+							opacity: TextureModel.opacity,
+							side: THREE.DoubleSide
+						} );
+
+						const shapes = font.generateShapes( TextureModel.message, TextureModel.curveSegments );
+
+						const geometry = new THREE.ShapeGeometry( shapes );
+
+						geometry.computeBoundingBox();
+
+						const xMid = TextureModel.xMid * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+
+						geometry.translate( xMid, TextureModel.translate_x, TextureModel.translate_y );
+
+						const text = new THREE.Mesh( geometry, matLite );
+						text.position.z = TextureModel.position_z;
+						return text;
+					}
+					//#region Title Rajkumar
 
 					const color = 0x000000;
 
@@ -48,14 +81,14 @@
 
 					const matLite = new THREE.MeshBasicMaterial( {
 						color: color,
-						transparent: true,
-						opacity: 0.3,
+						transparent: false,
+						opacity: 1,
 						side: THREE.DoubleSide
 					} );
 
 					const message = "Rajkumar S";
 
-					const shapes = font.generateShapes( message, 100 );
+					const shapes = font.generateShapes( message, 80 );
 
 					const geometry = new THREE.ShapeGeometry( shapes );
 
@@ -64,42 +97,6 @@
 					const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
 
 					geometry.translate( xMid, 0, 0 );
-
-					//const text = new THREE.Mesh( geometry, matLite );
-					//text.position.z = - 150;
-					//scene.add( text );
-
-					// region engineer
-					const _color = 0x000000;
-
-					const _matDark = new THREE.LineBasicMaterial( {
-						color: _color,
-						side: THREE.DoubleSide
-					} );
-
-					const _matLite = new THREE.MeshBasicMaterial( {
-						color: _color,
-						transparent: true,
-						opacity: 0.3,
-						side: THREE.DoubleSide
-					} );
-
-					const _message = "  Engineer";
-
-					const _shapes = font.generateShapes( _message, 100 );
-
-					const _geometry = new THREE.ShapeGeometry( _shapes );
-
-					_geometry.computeBoundingBox();
-
-					const _xMid = - 0.5 * ( _geometry.boundingBox.max.x - _geometry.boundingBox.min.x );
-
-					_geometry.translate( xMid, 0, 0 );
-
-					const _text = new THREE.Mesh( _geometry, _matLite );
-					_text.position.z = - 150;
-					scene.add( _text );
-					// end region engineer
 
 					// make line shape ( N.B. edge view remains visible )
 
@@ -115,11 +112,8 @@
 
 								const hole = shape.holes[ j ];
 								holeShapes.push( hole );
-
 							}
-
 						}
-
 					}
 
 					shapes.push.apply( shapes, holeShapes );
@@ -141,6 +135,22 @@
 					}
 
 					scene.add( lineText );
+
+					//#endregion Title Rajkumar
+
+					//#region Me
+					scene.add(generateText(EnggTextModel));
+					scene.add(generateText(ScientistTextModel));
+					//#endregion Me
+
+					//#region Test
+					//scene.add(generateText(EducationTextModel));
+					// var testgeometry = new THREE.TextGeometry('test', {font: font, size:120, height: 10, material: 0, bevelThickness: 1, extrudeMaterial: 1});
+					// var testmaterial = new THREE.MeshLambertMaterial({color: 0xF3FFE0});
+					// var testmesh = new THREE.Mesh(testgeometry, testmaterial);
+					// testmesh.position.z = 100;
+					// scene.add(testmesh);
+					//#endregion Test
 
 				} ); //end load function
 
