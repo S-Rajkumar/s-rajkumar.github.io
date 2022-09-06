@@ -33,7 +33,10 @@
 			function init( ) {
 
 				camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
+				//camera.position.set( 500, 0, 0 );
+				//camera.position.set( - 500, 0, 0 );
 				camera.position.set( 0, 0, -538 );
+				//camera.position.set( 0, 0, 538 );
 
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xf0f0f0 );
@@ -67,9 +70,15 @@
 						geometry.translate( xMid, TextureModel.translate_x, TextureModel.translate_y );
 
 						const text = new THREE.Mesh( geometry, matLite );
+						text.position.x = TextureModel.position_x;
+						text.position.y = TextureModel.position_y;
 						text.position.z = TextureModel.position_z;
+						text.rotation.x = TextureModel.rotation_x;
+						text.rotation.y = TextureModel.rotation_y;
+						text.rotation.z = TextureModel.rotation_z;
 						return text;
 					}
+
 					//#region Title Rajkumar
 
 					const color = 0x000000;
@@ -138,19 +147,87 @@
 
 					//#endregion Title Rajkumar
 
-					//#region Me
-					scene.add(generateText(EnggTextModel));
-					scene.add(generateText(ScientistTextModel));
-					//#endregion Me
+					
+					if(window.innerWidth < 1000 ){
+						//#region Me
+						scene.add(generateText(M_EnggTextModel));
+						scene.add(generateText(M_ScientistTextModel));
+						//#endregion Me
 
-					//#region Test
-					//scene.add(generateText(EducationTextModel));
-					// var testgeometry = new THREE.TextGeometry('test', {font: font, size:120, height: 10, material: 0, bevelThickness: 1, extrudeMaterial: 1});
-					// var testmaterial = new THREE.MeshLambertMaterial({color: 0xF3FFE0});
-					// var testmesh = new THREE.Mesh(testgeometry, testmaterial);
-					// testmesh.position.z = 100;
-					// scene.add(testmesh);
-					//#endregion Test
+						//#region Experience
+						scene.add(generateText(M_ExperienceTextModel));
+						scene.add(generateText(M_Exp1TitleTextModel));
+						scene.add(generateText(M_Exp1DateTextModel));
+						scene.add(generateText(M_Exp1RolesTextModel));
+						scene.add(generateText(M_Exp2TitleTextModel));
+						scene.add(generateText(M_Exp2DateTextModel));
+						scene.add(generateText(M_Exp2RolesTextModel));
+						//#endregion Experience
+
+						//#region Skills
+						scene.add(generateText(M_SkillsTextModel));
+						scene.add(generateText(M_SkillsDescTextModel));
+						scene.add(generateText(M_Skills1TextModel));
+						scene.add(generateText(M_Skills2TextModel));
+						scene.add(generateText(M_Skills3TextModel));
+						scene.add(generateText(M_Skills4TextModel));
+						scene.add(generateText(M_Skills5TextModel));
+						scene.add(generateText(M_Skills6TextModel));
+						scene.add(generateText(M_Skills7TextModel));
+						scene.add(generateText(M_Skills8TextModel));
+						scene.add(generateText(M_Skills9TextModel));
+						//#endregion Skills
+
+						//#region Certifications
+						scene.add(generateText(M_CertTextModel));
+						scene.add(generateText(M_Cert1TextModel));
+						scene.add(generateText(M_Cert1OrgModel));
+						scene.add(generateText(M_Cert1ScoreModel));
+						scene.add(generateText(M_Cert2TextModel));
+						scene.add(generateText(M_Cert2OrgModel));
+						scene.add(generateText(M_Cert2ScoreModel));
+						//#endregion Certification
+					}
+					else {
+						//#region Me
+						scene.add(generateText(N_EnggTextModel));
+						scene.add(generateText(N_ScientistTextModel));
+						//#endregion Me
+
+						//#region Experience
+						scene.add(generateText(N_ExperienceTextModel));
+						scene.add(generateText(N_Exp1TitleTextModel));
+						scene.add(generateText(N_Exp1DateTextModel));
+						scene.add(generateText(N_Exp1RolesTextModel));
+						scene.add(generateText(N_Exp2TitleTextModel));
+						scene.add(generateText(N_Exp2DateTextModel));
+						scene.add(generateText(N_Exp2RolesTextModel));
+						//#endregion Experience
+
+						//#region Skills
+						scene.add(generateText(N_SkillsTextModel));
+						scene.add(generateText(N_SkillsDescTextModel));
+						scene.add(generateText(N_Skills1TextModel));
+						scene.add(generateText(N_Skills2TextModel));
+						scene.add(generateText(N_Skills3TextModel));
+						scene.add(generateText(N_Skills4TextModel));
+						scene.add(generateText(N_Skills5TextModel));
+						scene.add(generateText(N_Skills6TextModel));
+						scene.add(generateText(N_Skills7TextModel));
+						scene.add(generateText(N_Skills8TextModel));
+						scene.add(generateText(N_Skills9TextModel));
+						//#endregion Skills
+
+						//#region Certifications
+						scene.add(generateText(N_CertTextModel));
+						scene.add(generateText(N_Cert1TextModel));
+						scene.add(generateText(N_Cert1OrgModel));
+						scene.add(generateText(N_Cert1ScoreModel));
+						scene.add(generateText(N_Cert2TextModel));
+						scene.add(generateText(N_Cert2OrgModel));
+						scene.add(generateText(N_Cert2ScoreModel));
+						//#endregion Certification
+					}
 
 				} ); //end load function
 
