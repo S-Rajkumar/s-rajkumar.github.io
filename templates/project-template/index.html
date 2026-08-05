@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR File Share — Rajkumar S</title>
-<meta name="description" content="QR File Share — Share files and folders instantly between devices on the same network. No internet, no cables, no cloud. Just scan and transfer.">
+<title>[Project Name] — Rajkumar S</title>
+<meta name="description" content="[One-line description of the project, used for search/share previews.]">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,25 +23,27 @@
     </a>
 
     <header class="detail-header">
-      <div class="detail-eyebrow">File Sharing &middot; 2026</div>
-      <h1>QR File Share</h1>
-      <p class="detail-tagline">Share files and folders instantly between devices on the same network. No internet, no cables, no cloud. Just scan and transfer.</p>
+      <div class="detail-eyebrow">[Category] &middot; [Year]</div>
+      <h1>[Project Name]</h1>
+      <p class="detail-tagline">[One or two sentence tagline / short description.]</p>
 
       <div class="detail-meta-row">
         <span class="status-tag in-development" style="position:static;">In development</span>
+        <!-- Delete/duplicate the chip below for whichever platforms apply.
+             Available classes: android / web / windows / game / meta -->
         <span class="p-chip android">Android</span>
-        <span class="p-chip windows">Windows</span>
       </div>
     </header>
 
     <div class="detail-hero-media">
-      <img src="cover.png" alt="QR File Share cover image" onerror="this.src='../assets/images/placeholder.svg'">
+      <img src="cover.jpg" alt="[Project Name] cover image" onerror="this.src='../assets/images/placeholder.svg'">
     </div>
 
     <div class="detail-layout">
       <div class="detail-main">
         <h2>Overview</h2>
-        <p>QR File Share lets you send files and whole folders straight from one device to another, as long as they're on the same network. There's no account to create, no file to upload anywhere first, and no internet connection required — one device shows a QR code, the other scans it, and the transfer starts.</p>
+        <p>[Full description paragraph one — what the project is and who it's for.]</p>
+        <p>[Optional second paragraph — how it was built, what makes it different.]</p>
 
         <h2>Key features</h2>
         <ul class="feature-list"></ul>
@@ -52,8 +54,8 @@
           <h3>Details</h3>
           <div class="meta-list">
             <div class="row"><span>Status</span><span>In development</span></div>
-            <div class="row"><span>Category</span><span>File Sharing</span></div>
-            <div class="row"><span>Platforms</span><span>Android, Windows</span></div>
+            <div class="row"><span>Category</span><span>[Category]</span></div>
+            <div class="row"><span>Platforms</span><span>[Android, Windows, ...]</span></div>
           </div>
         </div>
 
@@ -75,45 +77,53 @@
   const site = await renderNav("", "../");
   renderFooter(site, "../");
 
-  // ---- Key features (edit this array freely) ----
+  // ---- Key features — edit this array ----
   const KEY_FEATURES = [
-    "Transfer files and whole folders directly between devices",
-    "Works entirely over your local network — no internet required",
-    "No cables or cloud upload needed",
-    "Scan a QR code to start the transfer instantly"
+    "[Feature one]",
+    "[Feature two]",
+    "[Feature three]"
   ];
   document.querySelector(".feature-list").innerHTML = KEY_FEATURES
     .map(f => `<li>${ICONS.check}<span>${f}</span></li>`)
     .join("");
 
-  // ---- Screenshots (add files to /qr-file-share/screenshots/ and list them here) ----
+  // ---- Screenshots — add files to ./screenshots/ and list them here ----
   const SCREENSHOTS = [
-    "screenshots/screenshot_1.jpeg",
-    "screenshots/screenshot_2.jpeg",
-    "screenshots/screenshot_3.jpeg",
-    "screenshots/screenshot_4.jpeg",
-    "screenshots/screenshot_5.jpeg",
-    "screenshots/screenshot_6.jpeg"
+    // "screenshots/shot-1.jpg",
+    // "screenshots/shot-2.jpg"
   ];
   if (SCREENSHOTS.length) {
     const section = document.createElement("div");
-    section.innerHTML = `<br /><h2>Screenshots</h2>
+    section.innerHTML = `<h2>Screenshots</h2>
       <div class="screenshot-strip">
-        ${SCREENSHOTS.map(s => `<img src="${s}" alt="QR File Share screenshot" loading="lazy" onerror="this.remove()">`).join("")}
+        ${SCREENSHOTS.map(s => `<img src="${s}" alt="[Project Name] screenshot" loading="lazy" onerror="this.remove()">`).join("")}
       </div>`;
     document.querySelector(".detail-main").appendChild(section);
   }
 
-  // ---- Links (fill these in once published — leave empty to show "Coming soon") ----
+  // ---- Demo video — optional, paste a YouTube/Vimeo EMBED url ----
+  const DEMO_VIDEO = ""; // e.g. "https://www.youtube.com/embed/VIDEO_ID"
+  if (DEMO_VIDEO) {
+    const section = document.createElement("div");
+    section.innerHTML = `<h2>Demo video</h2>
+      <div class="video-embed"><iframe src="${DEMO_VIDEO}" title="[Project Name] demo video" loading="lazy" allowfullscreen></iframe></div>`;
+    document.querySelector(".detail-main").appendChild(section);
+  }
+
+  // ---- Links — fill in as they become available, leave "" for "Coming soon" ----
   const LINKS = {
     androidStore: "",
     windowsDownload: "",
+    webApp: "",
+    metaStore: "",
     sourceCode: "",
     privacyPolicy: "privacy-policy.html"
   };
   const LINK_LABELS = {
     androidStore: { label: "Get it on Google Play", icon: "android" },
     windowsDownload: { label: "Download for Windows", icon: "windows" },
+    webApp: { label: "Open web app", icon: "globe" },
+    metaStore: { label: "Get it on Meta Quest", icon: "headset" },
     sourceCode: { label: "Source code", icon: "github" },
     privacyPolicy: { label: "Privacy policy", icon: "shield" }
   };
@@ -121,7 +131,7 @@
   linksList.innerHTML = Object.entries(LINK_LABELS).map(([key, meta]) => {
     const url = LINKS[key];
     if (!url) {
-      return `<span class="link-list-row" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:6px;border:1px dashed var(--border);color:var(--text-faint);font-size:0.88rem;">
+      return `<span style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:6px;border:1px dashed var(--border);color:var(--text-faint);font-size:0.88rem;">
         <span class="link-label">${ICONS[meta.icon]} ${meta.label}</span>
         <span style="font-family:var(--font-mono);font-size:0.72rem;">Coming soon</span>
       </span>`;

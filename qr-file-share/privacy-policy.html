@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — QR File Share</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
 <style>
   :root {
     --primary: #2563EB;
@@ -114,6 +116,12 @@
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <div class="container">
+    <a class="brand" href="../index.html"><span class="dot"></span>Rajkumar S</a>
+  </div>
+</nav>
+
 <div class="container">
 
   <header>
@@ -221,5 +229,15 @@
   </footer>
 
 </div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Rajkumar S. All rights reserved.</span>
+      <a href="../index.html" style="color:var(--text-muted)">&larr; Back to portfolio</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

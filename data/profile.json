@@ -1,0 +1,37 @@
+{
+  "photo": "assets/images/profile/photo.jpg",
+  "name": "Rajkumar S",
+  "role": "Engineer",
+  "intro": [
+    "The passionate developer with a hunger to learn and create new things."
+  ],
+  "experience": [
+    {
+      "role": "Engineer",
+      "org": "Logic Envision Tech LLP",
+      "period": "Oct 2023 — Present · 2 yrs 11 mos"
+    },
+    {
+      "role": "System Analyst",
+      "org": "Public Company",
+      "period": "Oct 2022 — Jul 2023 · 10 mos"
+    },
+    {
+      "role": "Member Technical Staff",
+      "org": "Private Company",
+      "period": "Feb 2022 — Aug 2022 · 7 mos"
+    },
+    {
+      "role": "Python Developer",
+      "org": "Startup Company",
+      "period": "Oct 2020 — Dec 2021 · 1 yr 3 mos"
+    }
+  ],
+  "education": [
+    {
+      "school": "Government College of Engineering, Srirangam",
+      "credential": "Bachelor's degree, Computer Science",
+      "period": "2016 — 2020"
+    }
+  ]
+}

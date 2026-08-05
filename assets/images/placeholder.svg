@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400">
+  <rect width="640" height="400" fill="#1C2330"/>
+  <g fill="none" stroke="#5B6478" stroke-width="2">
+    <rect x="60" y="60" width="520" height="280" rx="12"/>
+    <path d="M60 300 180 200 260 260 400 140 580 260" />
+    <circle cx="480" cy="120" r="24"/>
+  </g>
+  <text x="320" y="370" font-family="monospace" font-size="16" fill="#5B6478" text-anchor="middle">image not found — replace via data/*.json</text>
+</svg>

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "qr-file-share",
+    "name": "QR File Share",
+    "shortDescription": "Share files and folders instantly between devices on the same network. No internet, no cables, no cloud. Just scan and transfer.",
+    "image": "qr-file-share/cover.png",
+    "status": "in-development",
+    "detailsUrl": "qr-file-share/",
+    "links": {
+      "android": "",
+      "windows": ""
+    }
+  }
+]

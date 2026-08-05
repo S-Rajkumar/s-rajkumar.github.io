@@ -1,0 +1,16 @@
+{
+  "name": "Rajkumar S",
+  "role": "Developer",
+  "tagline": "The passionate developer with a hunger to learn and create new things.",
+  "email": "udmnxpdu.support@gmail.com",
+  "portfolioUrl": "https://s-rajkumar.github.io/",
+  "socials": [],
+  "footer": {
+    "about": "Building apps, games and tools across Android, Web, Windows and Meta — one project at a time.",
+    "quickLinks": [
+      { "label": "Home", "url": "index.html" },
+      { "label": "Profile", "url": "profile.html" },
+      { "label": "Contact", "url": "contact.html" }
+    ]
+  }
+}
