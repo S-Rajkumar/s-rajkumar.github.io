@@ -10,5 +10,16 @@
       "android": "",
       "windows": ""
     }
+  },
+  {
+    "id": "kids_tamil_ezhuthu_school",
+    "name": "Kids: அஆஇஈ தமிழ் எழுத்து — 247",
+    "shortDescription": "Teaches children all 247 Tamil characters through guided handwriting tracing, built on real stroke-order data, plus a letter-building word game.",
+    "image": "kids_tamil_ezhuthu_school/cover.png",
+    "status": "in-development",
+    "detailsUrl": "kids_tamil_ezhuthu_school/",
+    "links": {
+      "android": ""
+    }
   }
 ]

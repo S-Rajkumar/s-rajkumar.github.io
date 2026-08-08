@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids: அஆஇஈ தமிழ் எழுத்து — 247 — Rajkumar S</title>
+<meta name="description" content="Kids: அஆஇஈ தமிழ் எழுத்து — 247 — A Flutter app that teaches children all 247 Tamil characters through guided handwriting tracing, real stroke-order data, and a letter-building game.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav"></nav>
+
+<main>
+  <div class="container">
+    <a class="back-link" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+      All work
+    </a>
+
+    <header class="detail-header">
+      <div class="detail-eyebrow">Kids Education &middot; 2026</div>
+      <h1>Kids: அஆஇஈ தமிழ் எழுத்து — 247</h1>
+      <p class="detail-tagline">Teaches children all 247 Tamil characters through guided handwriting tracing, built on real stroke-order data — not a guess derived from a font.</p>
+
+      <div class="detail-meta-row">
+        <span class="status-tag in-development" style="position:static;">In development</span>
+        <span class="p-chip android">Android</span>
+      </div>
+    </header>
+
+    <div class="detail-hero-media">
+      <img src="cover.png" alt="Kids: அஆஇஈ தமிழ் எழுத்து — 247 tracing screen" onerror="this.src='../assets/images/placeholder.svg'">
+    </div>
+
+    <div class="detail-layout">
+      <div class="detail-main">
+        <h2>Overview</h2>
+        <p>A Tamil-first Flutter app for children aged roughly 4–8, teaching every one of Tamil's 247 characters — the 12 vowels, 18 consonants, and all 216 vowel-consonant combinations — plus 6 additional characters used for borrowed sounds. Each letter is traced on a landscape canvas across four difficulty levels, from a fully guided tube-and-waypoint mode down to a freehand shape exam, with every layer of the canvas — the guide, the fill, the scoring — derived from the same stroke path so nothing on screen ever disagrees with what's being measured.</p>
+        <p>Stroke order couldn't be guessed from a font: a typeface has the correct letterform but no notion of what a hand draws first, so each character's writing order comes from a dedicated authoring pipeline and a stroke-order reference, verified by hand rather than shipped unchecked. Beyond tracing, a Word Builder game teaches children to compose real Tamil words by dragging and combining the 31 base characters — nothing pre-built is ever handed over. The whole app is built child-safety-first: no login, no accounts, no chat, no analytics, and every byte of a child's progress and drawings stays on the device.</p>
+
+        <h2>Key features</h2>
+        <ul class="feature-list"></ul>
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="side-card">
+          <h3>Details</h3>
+          <div class="meta-list">
+            <div class="row"><span>Status</span><span>In development</span></div>
+            <div class="row"><span>Category</span><span>Kids Education</span></div>
+            <div class="row"><span>Platforms</span><span>Android</span></div>
+            <div class="row"><span>Built with</span><span>Flutter, Riverpod</span></div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Links &amp; downloads</h3>
+          <div class="link-list" id="links-list"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/shared.js"></script>
+<script>
+(async function initProject() {
+  const site = await renderNav("", "../");
+  renderFooter(site, "../");
+
+  // ---- Key features (edit this array freely) ----
+  const KEY_FEATURES = [
+    "All 247 core Tamil characters — 12 vowels, 18 consonants, 216 vowel-consonant forms — plus 6 borrowed-sound characters",
+    "Real, hand-verified stroke order for every letter, not auto-derived from font outlines",
+    "Four tracing difficulty modes — Easy, Medium, Hard, Challenge — with live shape-accuracy scoring on the freehand exam",
+    "Word Builder game: compose real Tamil words by dragging and combining the 31 base characters",
+    "Stars, coins, hearts and printable certificates track progress without ever locking a letter behind a paywall",
+    "Child-safety first: no login, no accounts, no chat, no analytics — progress and drawings stay on the device",
+    "Tamil-first bilingual UI with a parental gate in front of purchases, ad settings and outbound links"
+  ];
+  document.querySelector(".feature-list").innerHTML = KEY_FEATURES
+    .map(f => `<li>${ICONS.check}<span>${f}</span></li>`)
+    .join("");
+
+  // ---- Screenshots (add files to /kids_tamil_ezhuthu_school/screenshots/ and list them here) ----
+  const SCREENSHOTS = [
+    "screenshots/screenshot_1.png",
+    "screenshots/screenshot_2.png",
+    "screenshots/screenshot_3.png",
+    "screenshots/screenshot_4.png"
+  ];
+  if (SCREENSHOTS.length) {
+    const section = document.createElement("div");
+    section.innerHTML = `<br /><h2>Screenshots</h2>
+      <div class="screenshot-strip">
+        ${SCREENSHOTS.map(s => `<img src="${s}" alt="Kids: அஆஇஈ தமிழ் எழுத்து — 247 screenshot" loading="lazy" onerror="this.remove()">`).join("")}
+      </div>`;
+    document.querySelector(".detail-main").appendChild(section);
+  }
+
+  // ---- Links (fill these in once published — leave empty to show "Coming soon") ----
+  const LINKS = {
+    androidStore: "",
+    sourceCode: "",
+    privacyPolicy: "privacy-policy.html"
+  };
+  const LINK_LABELS = {
+    androidStore: { label: "Get it on Google Play", icon: "android" },
+    sourceCode: { label: "Source code", icon: "github" },
+    privacyPolicy: { label: "Privacy policy", icon: "shield" }
+  };
+  const linksList = document.getElementById("links-list");
+  linksList.innerHTML = Object.entries(LINK_LABELS).map(([key, meta]) => {
+    const url = LINKS[key];
+    if (!url) {
+      return `<span class="link-list-row" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:6px;border:1px dashed var(--border);color:var(--text-faint);font-size:0.88rem;">
+        <span class="link-label">${ICONS[meta.icon]} ${meta.label}</span>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;">Coming soon</span>
+      </span>`;
+    }
+    return linkRow(key, url, meta.label, meta.icon);
+  }).join("");
+})();
+</script>
+</body>
+</html>
