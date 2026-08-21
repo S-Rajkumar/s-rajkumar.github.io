@@ -21,5 +21,16 @@
     "links": {
       "android": ""
     }
+  },
+  {
+    "id": "kids_learn_tamil_by_playing",
+    "name": "Kids: Learn Tamil by Playing",
+    "shortDescription": "A Tamil friend who lives on the screen. Feed them, dress them, grow a garden of letters — and learn all 247 Tamil characters and a thousand everyday Tamil words along the way.",
+    "image": "kids_learn_tamil_by_playing/cover.png",
+    "status": "in-development",
+    "detailsUrl": "kids_learn_tamil_by_playing/",
+    "links": {
+      "android": ""
+    }
   }
 ]

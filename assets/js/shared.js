@@ -101,3 +101,103 @@ function renderFooter(site, basePath = "") {
       </div>
     </div>`;
 }
+
+// -------------------------- SCREENSHOT LIGHTBOX ----------------------------
+//
+// The strip crops each shot to 9/16 with `object-fit: cover`, which is right
+// for a row of thumbnails and wrong for looking at one: a 1080x2400 phone
+// screenshot loses its top and bottom. Clicking one opens it whole.
+//
+// Wired by delegation on `document` rather than by binding each <img>,
+// because every project page injects its screenshots from its own inline
+// script *after* this file has run. Delegation means a page needs no change
+// to get this — it works for any `.screenshot-strip img`, whenever it
+// appears.
+
+(function setupLightbox() {
+  let box = null;
+  let shots = [];
+  let index = 0;
+  let lastFocused = null;
+
+  function build() {
+    box = document.createElement("div");
+    box.className = "lightbox";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", "Screenshot viewer");
+    box.innerHTML = `
+      <button class="lightbox-btn lightbox-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="lightbox-btn lightbox-prev" aria-label="Previous screenshot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <img alt="">
+      <button class="lightbox-btn lightbox-next" aria-label="Next screenshot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <span class="lightbox-count"></span>`;
+    document.body.appendChild(box);
+
+    // A click on the backdrop closes; a click on the picture itself must not,
+    // or dragging to look at a detail dismisses the thing being looked at.
+    box.addEventListener("click", (e) => {
+      if (e.target === box) close();
+    });
+    box.querySelector(".lightbox-close").addEventListener("click", close);
+    box.querySelector(".lightbox-prev").addEventListener("click", () => step(-1));
+    box.querySelector(".lightbox-next").addEventListener("click", () => step(1));
+    return box;
+  }
+
+  function show() {
+    const img = box.querySelector("img");
+    const from = shots[index];
+    img.src = from.currentSrc || from.src;
+    img.alt = from.alt || "Screenshot";
+    box.querySelector(".lightbox-count").textContent =
+      `${index + 1} / ${shots.length}`;
+    box.classList.toggle("single", shots.length < 2);
+  }
+
+  function step(by) {
+    if (shots.length < 2) return;
+    index = (index + by + shots.length) % shots.length;
+    show();
+  }
+
+  function open(img) {
+    // Only the strip this image belongs to, so two strips on one page step
+    // through their own shots rather than each other's.
+    shots = Array.from(img.closest(".screenshot-strip").querySelectorAll("img"));
+    index = Math.max(0, shots.indexOf(img));
+    lastFocused = document.activeElement;
+    if (!box) build();
+    show();
+    box.classList.add("open");
+    document.body.classList.add("lightbox-open");
+    box.querySelector(".lightbox-close").focus();
+  }
+
+  function close() {
+    if (!box) return;
+    box.classList.remove("open");
+    document.body.classList.remove("lightbox-open");
+    // Drop the source so a big PNG is not held decoded behind the overlay.
+    box.querySelector("img").removeAttribute("src");
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest(".screenshot-strip img");
+    if (img) open(img);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!box || !box.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+  });
+})();

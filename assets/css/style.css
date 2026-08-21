@@ -452,16 +452,35 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px solid var(--border-soft);
   background: var(--surface);
 }
-.detail-hero-media img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+/* The hero shows the whole cover, at whatever shape the cover actually is.
+   It used to force 16/9 and `object-fit: cover`, and not one of the covers
+   is 16/9 — the two feature graphics are about 2:1 and lost their left and
+   right edges, and QR File Share's is 3:2 and lost its top and bottom. A
+   cover is a composed image; cropping it is throwing away the composition.
 
+   No max-height either. A cap sounds harmless and is not: capping the box
+   while the image keeps its own shape just trades the crop for letterbox
+   bars, which is what happened to the 3:2 cover at 78vh. The hero is as
+   tall as its cover is, and a wide cover — which a Play feature graphic
+   always is — is short anyway. */
+.detail-hero-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* One column, always.
+   This used to be a 1.7fr/1fr split with the facts in a right-hand rail.
+   Two problems with that: the rail is the narrowest column on the page and
+   it holds the longest strings on it ("Get it on Google Play"), and the
+   reading order put reference data beside the pitch instead of after it.
+   Stacked, the facts land where somebody actually wants them — once they
+   have read what the thing is, and before the screenshots. */
 .detail-layout {
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: 56px;
-  padding: 8px 0 64px;
-}
-@media (max-width: 860px) {
-  .detail-layout { grid-template-columns: 1fr; gap: 40px; }
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 8px 0 40px;
 }
 
 .detail-main h2 { font-size: 1.3rem; margin-top: 40px; }
@@ -503,7 +522,79 @@ button { font-family: inherit; cursor: pointer; }
   aspect-ratio: 9/16;
   object-fit: cover;
   width: 100%;
+  cursor: zoom-in;
+  transition: border-color 0.15s ease, transform 0.15s ease;
 }
+.screenshot-strip img:hover { border-color: var(--accent-2); transform: translateY(-2px); }
+
+/* ---- Lightbox --------------------------------------------------------
+   The strip crops every shot to 9/16 with object-fit: cover, so a tall
+   phone screenshot loses its top and bottom. Clicking one has to show the
+   whole thing, uncropped — object-fit: contain, and sized against the
+   viewport rather than the image, so a 1080x2400 PNG does not open taller
+   than the window. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 64px;
+  background: rgba(8, 9, 12, 0.92);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-m);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+}
+.lightbox-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.lightbox-btn:hover { border-color: var(--accent-2); color: var(--accent-2); }
+.lightbox-btn svg { width: 20px; height: 20px; }
+.lightbox-close { top: 20px; right: 20px; }
+.lightbox-prev { left: 14px; }
+.lightbox-next { right: 14px; }
+.lightbox-count {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-faint);
+}
+/* One image means nothing to step through. */
+.lightbox.single .lightbox-prev,
+.lightbox.single .lightbox-next,
+.lightbox.single .lightbox-count { display: none; }
+
+@media (max-width: 620px) {
+  .lightbox { padding: 56px 12px; }
+  .lightbox-prev { left: 6px; }
+  .lightbox-next { right: 6px; }
+}
+
+body.lightbox-open { overflow: hidden; }
 
 .video-embed {
   margin-top: 18px;
@@ -515,7 +606,15 @@ button { font-family: inherit; cursor: pointer; }
 .video-embed iframe { width: 100%; height: 100%; border: 0; }
 
 /* Sidebar */
-.detail-sidebar { display: flex; flex-direction: column; gap: 20px; }
+/* Full width now, so the cards sit side by side rather than one stretched
+   card per row. auto-fit collapses them to a single column on a narrow
+   screen without a breakpoint to keep in step with anything else. */
+.detail-sidebar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
 .side-card {
   background: var(--surface);
   border: 1px solid var(--border-soft);
@@ -546,7 +645,8 @@ button { font-family: inherit; cursor: pointer; }
 .meta-list .row span:last-child { color: var(--text); font-weight: 500; text-align: right; }
 
 .link-list { display: grid; gap: 10px; }
-.link-list a {
+.link-list a,
+.link-list .link-list-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -560,8 +660,33 @@ button { font-family: inherit; cursor: pointer; }
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 .link-list a:hover { border-color: var(--accent-2); color: var(--accent-2); }
-.link-list a svg { width: 15px; height: 15px; flex-shrink: 0; }
-.link-list .link-label { display: flex; align-items: center; gap: 10px; }
+
+/* A row for a link that does not exist yet. Dashed and muted so it reads as
+   a placeholder rather than something that failed to load. */
+.link-list .link-list-row {
+  border-style: dashed;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+.link-list .link-list-row .soon {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+/* Every icon in the list, not just the ones inside an <a>.
+   The icon set is viewBox-only with no width or height attribute, so an SVG
+   that matches no rule falls back to the replaced-element default of
+   300x150 — which is exactly what happened to the "Coming soon" rows, since
+   those are a <span> and the old selector was `.link-list a svg`. A single
+   giant robot pushed "Get it on Google Play" onto three lines. */
+.link-list svg { width: 15px; height: 15px; flex-shrink: 0; }
+.link-list .link-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;            /* or a long label cannot shrink and overflows */
+}
 
 /* =========================================================
    PROFILE PAGE

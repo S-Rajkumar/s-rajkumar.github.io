@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids: Learn Tamil by Playing — Rajkumar S</title>
+<meta name="description" content="Kids: Learn Tamil by Playing — A Flutter app where a Tamil companion character, a garden and ten word games teach children all 247 Tamil characters and 1,000+ everyday Tamil words.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav"></nav>
+
+<main>
+  <div class="container">
+    <a class="back-link" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+      All work
+    </a>
+
+    <header class="detail-header">
+      <div class="detail-eyebrow">Kids Education &middot; 2026</div>
+      <h1>Kids: Learn Tamil by Playing</h1>
+      <p class="detail-tagline">A Tamil friend who lives on the screen. Feed them, dress them, grow a garden of letters — and learn all 247 Tamil characters and a thousand everyday Tamil words without ever being told you are in a lesson.</p>
+
+      <div class="detail-meta-row">
+        <span class="status-tag in-development" style="position:static;">In development</span>
+        <span class="p-chip android">Android</span>
+      </div>
+    </header>
+
+    <div class="detail-hero-media">
+      <img src="cover.png" alt="Kids: Learn Tamil by Playing home screen" onerror="this.src='../assets/images/placeholder.svg'">
+    </div>
+
+    <div class="detail-layout">
+      <div class="detail-main">
+        <h2>Overview</h2>
+        <p>A Flutter app for Tamil children aged roughly 4&ndash;8, built on a simple idea: a child will come back for a friend, not for a curriculum. The app opens on a companion the child picks &mdash; a girl or a boy &mdash; who stands in a painted scene, blinks, gets hungry, gets sleepy, and reacts to being touched. Everything the app teaches is bought with what that friend earns.</p>
+        <p>Behind the character sit three systems that do the actual teaching. <strong>Tamil-247</strong> walks every one of Tamil's 247 characters along a snake map, and each one is written freehand from memory on a blank canvas &mdash; no tracing tube, no dotted outline &mdash; and marked on shape against real stroke data, with a pass mark measured rather than guessed. <strong>Ten word games</strong> draw on a roster of over a thousand Tamil words. And a <strong>garden</strong> turns each learned character into a sunflower that grows three different ways, so a child who does not want to write today can still make something happen.</p>
+        <p>The word roster is the part that took the longest to get right. Every word is weighted by how well a Tamil child actually knows it, so roughly three-quarters of what a child meets is something already in the room with them &mdash; அம்மா, மாடு, தோசை, பள்ளி &mdash; while the rarer words stay reachable instead of being locked away. English loanwords written in Tamil script were pulled out and replaced with the everyday Tamil where one honestly exists: பஸ் became பேருந்து, டீ became தேநீர், ரப்பர் became அழிப்பான். Where no Tamil word is genuinely spoken &mdash; கார், பென்சில் &mdash; the loanword stays, because teaching a child a coined word nobody at home says is not teaching them Tamil.</p>
+        <p>The whole app is built child-safety-first: no login, no account, no chat, no text field anywhere a child could type into, and no analytics or crash-reporting SDK. Every coin, letter and plant lives in local storage on the device. Ads, outbound links and quitting all sit behind a parental gate whose sum replaces itself on a wrong answer, so a child cannot get through it by elimination.</p>
+
+        <h2>Key features</h2>
+        <ul class="feature-list"></ul>
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="side-card">
+          <h3>Details</h3>
+          <div class="meta-list">
+            <div class="row"><span>Status</span><span>In development</span></div>
+            <div class="row"><span>Category</span><span>Kids Education</span></div>
+            <div class="row"><span>Platforms</span><span>Android</span></div>
+            <div class="row"><span>Built with</span><span>Flutter, Riverpod</span></div>
+            <div class="row"><span>Characters</span><span>247</span></div>
+            <div class="row"><span>Tamil words</span><span>1,056</span></div>
+            <div class="row"><span>Games</span><span>10</span></div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Links &amp; downloads</h3>
+          <div class="link-list" id="links-list"></div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Screenshots and the demo video are appended here, after the facts.
+         They are not in .detail-main because the layout is one column now
+         and appending them there would put them above the Details and
+         Links cards. -->
+    <div class="detail-extras"></div>
+  </div>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/shared.js"></script>
+<script>
+(async function initProject() {
+  const site = await renderNav("", "../");
+  renderFooter(site, "../");
+
+  // ---- Key features (edit this array freely) ----
+  const KEY_FEATURES = [
+    "A companion character the child picks and keeps — fourteen hand-rendered poses, four outfits, and a mood that answers being fed, stroked, poked or put to bed",
+    "Tamil-247: every one of the 247 characters written freehand from memory on a blank canvas and marked on shape, not traced over a guide",
+    "Ten word games — picture puzzle, sound match, first letter, missing letter, word builder, word creator, letter catch, memory match, combine letters and free tracing",
+    "1,056 Tamil words chosen from a child's own surroundings and weighted by familiarity, so three-quarters of what a child meets is a word they already half-know",
+    "Tamil rather than Thanglish: English loanwords replaced with the everyday Tamil wherever one is genuinely spoken",
+    "A garden where each learned character grows as a sunflower three different ways — by playing, by spending coins, or by watering a little each day",
+    "A shop of characters, pets and eight hand-painted scenes, opened by levels, letters and coins — with no real-money purchase anywhere in the app",
+    "Tamil pronunciation for every word through the device's own text-to-speech, and eight sound effects levelled by loudness rather than by peak",
+    "A Parent Zone behind a sum a four-year-old cannot do, holding the sound switches, an optional rewarded ad, and a shareable showcase card",
+    "Child-safety first: no login, no account, no chat, no text input, no analytics — every byte of progress stays on the device"
+  ];
+  document.querySelector(".feature-list").innerHTML = KEY_FEATURES
+    .map(f => `<li>${ICONS.check}<span>${f}</span></li>`)
+    .join("");
+
+  // ---- Screenshots (add files to /kids_learn_tamil_by_playing/screenshots/ and list them here) ----
+  const SCREENSHOTS = [
+    "screenshots/screenshot_1.png",
+    "screenshots/screenshot_2.png",
+    "screenshots/screenshot_3.png",
+    "screenshots/screenshot_4.png",
+    "screenshots/screenshot_5.png",
+    "screenshots/screenshot_6.png"
+  ];
+  if (SCREENSHOTS.length) {
+    const section = document.createElement("div");
+    section.innerHTML = `<br /><h2>Screenshots</h2>
+      <div class="screenshot-strip">
+        ${SCREENSHOTS.map(s => `<img src="${s}" alt="Kids: Learn Tamil by Playing screenshot" loading="lazy" onerror="this.remove()">`).join("")}
+      </div>`;
+    document.querySelector(".detail-extras").appendChild(section);
+  }
+
+  // ---- Links (fill these in once published — leave empty to show "Coming soon") ----
+  const LINKS = {
+    androidStore: "",
+    sourceCode: "",
+    privacyPolicy: "privacy-policy.html"
+  };
+  const LINK_LABELS = {
+    androidStore: { label: "Get it on Google Play", icon: "android" },
+    sourceCode: { label: "Source code", icon: "github" },
+    privacyPolicy: { label: "Privacy policy", icon: "shield" }
+  };
+  const linksList = document.getElementById("links-list");
+  linksList.innerHTML = Object.entries(LINK_LABELS).map(([key, meta]) => {
+    const url = LINKS[key];
+    if (!url) {
+      return `<span class="link-list-row">
+        <span class="link-label">${ICONS[meta.icon]} ${meta.label}</span>
+        <span class="soon">Coming soon</span>
+      </span>`;
+    }
+    return linkRow(key, url, meta.label, meta.icon);
+  }).join("");
+})();
+</script>
+</body>
+</html>
