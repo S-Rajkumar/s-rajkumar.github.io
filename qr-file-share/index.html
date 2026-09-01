@@ -83,10 +83,11 @@
 
   // ---- Key features (edit this array freely) ----
   const KEY_FEATURES = [
-    "Transfer files and whole folders directly between devices",
+    "Pair by scanning a QR code — then either device can send or receive",
+    "Send single files or an entire folder, with subfolders preserved",
+    "Preview images before you download them",
     "Works entirely over your local network — no internet required",
-    "No cables or cloud upload needed",
-    "Scan a QR code to start the transfer instantly"
+    "No account, no cables, no cloud upload"
   ];
   document.querySelector(".feature-list").innerHTML = KEY_FEATURES
     .map(f => `<li>${ICONS.check}<span>${f}</span></li>`)
@@ -98,8 +99,7 @@
     "screenshots/screenshot_2.jpeg",
     "screenshots/screenshot_3.jpeg",
     "screenshots/screenshot_4.jpeg",
-    "screenshots/screenshot_5.jpeg",
-    "screenshots/screenshot_6.jpeg"
+    "screenshots/screenshot_5.jpeg"
   ];
   if (SCREENSHOTS.length) {
     const section = document.createElement("div");
@@ -113,7 +113,7 @@
   // ---- Links (fill these in once published — leave empty to show "Coming soon") ----
   const LINKS = {
     androidStore: "",
-    windowsDownload: "",
+    windowsDownload: "downloads/QRFileShare-Windows-v1.0.0.zip",
     sourceCode: "",
     privacyPolicy: "privacy-policy.html"
   };

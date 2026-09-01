@@ -127,7 +127,7 @@
   <header>
     <div class="icon">🔒</div>
     <h1>Privacy Policy</h1>
-    <p class="updated">QR File Share — Last updated: August 5, 2026</p>
+    <p class="updated">QR File Share — Last updated: September 1, 2026</p>
   </header>
 
   <div class="card">
@@ -136,14 +136,23 @@
     <p>
       QR File Share ("the app") is a peer-to-peer file transfer tool that lets you
       send files, folders, and text between devices connected to the same local
-      Wi-Fi network or mobile hotspot. This policy explains what data the app
-      accesses, how it is used, and what is — and is not — collected.
+      Wi-Fi network or mobile hotspot. One device shows a QR code and the other
+      scans it to pair; once paired, either device can send or receive. This
+      policy explains what data the app accesses, how it is used, and what is —
+      and is not — collected.
+    </p>
+    <p>
+      Unless a section says otherwise, everything below describes the
+      <strong>Android</strong> app. The Windows version behaves differently in a
+      few important ways — see <em>The Windows version</em> near the end.
     </p>
 
     <div class="highlight-box">
       QR File Share does not use the internet or any cloud server to transfer your
       files. All file and text transfers happen directly between your devices over
-      your local network. We do not have access to, store, or see the content you share.
+      your local network. We do not have access to, store, or see the content you
+      share. (The advertising SDK described further down does contact Google's
+      servers — but it never has access to your files.)
     </div>
 
     <h2>Permissions the app requests</h2>
@@ -154,21 +163,33 @@
       </tr>
       <tr>
         <td>Camera</td>
-        <td>To scan the QR code shown on the sending device when using Receive.</td>
+        <td>To scan the pairing QR code displayed by the other device. The camera is used only while that scanning screen is open, and no image is stored or transmitted.</td>
       </tr>
       <tr>
-        <td>Storage / Files access</td>
-        <td>To let you choose files or folders to send, and to save files you download to your chosen location.</td>
+        <td>Wi-Fi state</td>
+        <td>To read your device's local IP address, which is what the pairing QR code encodes so the other device knows where to connect.</td>
       </tr>
       <tr>
-        <td>Wi-Fi / Network state</td>
-        <td>To detect your device's local IP address so a QR code can be generated for nearby devices to connect to.</td>
+        <td>Internet</td>
+        <td>Runs the small local transfer server on your device and connects to the other device's server. It is also used by the advertising SDK described below, which does contact Google's servers. Your files themselves never leave your local network.</td>
       </tr>
       <tr>
-        <td>Internet (local network only)</td>
-        <td>Used only to run a temporary local server on your device during a Send session and to connect to that server during a Receive session. No data leaves your local network.</td>
+        <td>Storage (older Android only)</td>
+        <td>On Android 10 and earlier, the system requires a storage permission to write received files. On Android 11 and later the app does not request any broad storage permission at all — see below.</td>
       </tr>
     </table>
+
+    <h2>How the app accesses your files</h2>
+    <p>
+      The app deliberately avoids broad storage access. It never requests
+      "All files access", and on modern Android it holds no general storage
+      permission:
+    </p>
+    <ul>
+      <li><strong>Choosing individual files</strong> uses the system file picker. Only the files you pick are handed to the app.</li>
+      <li><strong>Choosing a folder</strong> uses Android's Storage Access Framework. You explicitly grant one folder, and the app can read only inside that folder.</li>
+      <li><strong>Saving received files</strong> goes through Android's MediaStore into your public Downloads folder, which needs no special permission.</li>
+    </ul>
 
     <h2>What data we collect</h2>
     <p>
@@ -176,6 +197,26 @@
       contents, or usage analytics on external servers. Files you choose to share
       are transferred directly between your device and the receiving device over
       your local network only, for the duration of the active session.
+    </p>
+
+    <h2>Security of transfers — please read</h2>
+    <p>
+      Transfers happen over plain HTTP on your local network. They are
+      <strong>not encrypted</strong>, and there is no password on a transfer
+      session. This is a deliberate trade-off that keeps pairing instant and
+      works without any account or internet connection, but it has a real
+      consequence worth understanding:
+    </p>
+    <div class="highlight-box" style="background:#fef2f2;border-color:#fecaca;color:#991b1b;">
+      While a transfer session is active, anyone else on the same Wi-Fi network
+      who knows your device's address and port could download the files you are
+      currently offering. Only use the app on networks you trust, such as your
+      home Wi-Fi or your own hotspot — and disconnect when you are finished.
+    </div>
+    <p>
+      Nothing is offered before you pick it, and nothing remains available once
+      you tap STOP or close the app. The app never exposes your wider file
+      system — only the specific files or folder you chose for that session.
     </p>
 
     <h2>Clipboard access</h2>
@@ -188,12 +229,36 @@
 
     <h2>Advertising</h2>
     <p>
-      This app may display banner advertisements served through Google AdMob.
-      AdMob may collect certain device identifiers and usage data to serve relevant
-      ads, in accordance with
+      This app displays banner advertisements served through Google AdMob.
+      To do so, AdMob collects your device's <strong>advertising ID</strong> along
+      with certain device and usage information, and shares it with Google for
+      advertising and analytics purposes, in accordance with
       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
-      You can review or adjust ad personalization settings in your device's Google
-      Ads settings.
+      This is the only data associated with the app that leaves your device.
+      You can reset the advertising ID or limit ad personalisation at any time in
+      your device's Google settings.
+    </p>
+
+    <h2>The Windows version</h2>
+    <p>
+      A Windows build is available to download from the developer's site. It is
+      the same app, but several sections above simply do not apply to it:
+    </p>
+    <ul>
+      <li><strong>No advertising.</strong> The Windows build contains no ad SDK and shows no ads, so no advertising ID is collected and nothing is sent to Google.</li>
+      <li><strong>No permissions are requested.</strong> There is no camera, storage, or Wi-Fi permission prompt on Windows.</li>
+      <li><strong>No camera.</strong> Windows cannot scan QR codes, so it always displays the pairing code for a phone to scan, or you type the other device's address by hand.</li>
+      <li><strong>Received files</strong> are written straight to a folder you choose, rather than through Android's MediaStore.</li>
+    </ul>
+    <p>
+      With no ads and no analytics, the Windows build sends <strong>nothing at
+      all</strong> off your device. Everything in the "Security of transfers"
+      section above still applies: the transfer itself is unencrypted, so use it
+      only on networks you trust.
+    </p>
+    <p>
+      The download is not code-signed, so Windows may warn that the publisher is
+      unknown. That is expected for an independently distributed app.
     </p>
 
     <h2>Data sharing with third parties</h2>
