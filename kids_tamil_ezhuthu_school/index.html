@@ -40,7 +40,7 @@
     <div class="detail-layout">
       <div class="detail-main">
         <h2>Overview</h2>
-        <p>A Tamil-first Flutter app for children aged roughly 4–8, teaching every one of Tamil's 247 characters — the 12 vowels, 18 consonants, and all 216 vowel-consonant combinations — plus 6 additional characters used for borrowed sounds. Each letter is traced on a landscape canvas across four difficulty levels, from a fully guided tube-and-waypoint mode down to a freehand shape exam, with every layer of the canvas — the guide, the fill, the scoring — derived from the same stroke path so nothing on screen ever disagrees with what's being measured.</p>
+        <p>A Tamil-first Flutter app for children aged roughly 4–8, teaching every one of Tamil's 247 characters — the 12 vowels plus the ஃ aaytham, 18 consonants, and all 216 vowel-consonant combinations. A further 6 characters for sounds Tamil has borrowed are taught afterward as their own set. Each letter is traced on a landscape canvas across four difficulty levels, from a fully guided tube-and-waypoint mode down to a freehand shape exam, with every layer of the canvas — the guide, the fill, the scoring — derived from the same stroke path so nothing on screen ever disagrees with what's being measured.</p>
         <p>Stroke order couldn't be guessed from a font: a typeface has the correct letterform but no notion of what a hand draws first, so each character's writing order comes from a dedicated authoring pipeline and a stroke-order reference, verified by hand rather than shipped unchecked. Beyond tracing, a Word Builder game teaches children to compose real Tamil words by dragging and combining the 31 base characters — nothing pre-built is ever handed over. The whole app is built child-safety-first: no login, no accounts, no chat, no analytics, and every byte of a child's progress and drawings stays on the device.</p>
 
         <h2>Key features</h2>
@@ -84,7 +84,7 @@
 
   // ---- Key features (edit this array freely) ----
   const KEY_FEATURES = [
-    "All 247 core Tamil characters — 12 vowels, 18 consonants, 216 vowel-consonant forms — plus 6 borrowed-sound characters",
+    "All 247 core Tamil characters — 12 vowels, the ஃ aaytham, 18 consonants, and 216 vowel-consonant forms — plus a separate set of 6 borrowed-sound characters",
     "Real, hand-verified stroke order for every letter, not auto-derived from font outlines",
     "Four tracing difficulty modes — Easy, Medium, Hard, Challenge — with live shape-accuracy scoring on the freehand exam",
     "Word Builder game: compose real Tamil words by dragging and combining the 31 base characters",
@@ -114,13 +114,11 @@
 
   // ---- Links (fill these in once published — leave empty to show "Coming soon") ----
   const LINKS = {
-    androidStore: "",
-    sourceCode: "",
+    androidStore: "https://play.google.com/store/apps/details?id=com.udmnxpdu.kids_tamil_ezhuthu_school",
     privacyPolicy: "privacy-policy.html"
   };
   const LINK_LABELS = {
     androidStore: { label: "Get it on Google Play", icon: "android" },
-    sourceCode: { label: "Source code", icon: "github" },
     privacyPolicy: { label: "Privacy policy", icon: "shield" }
   };
   const linksList = document.getElementById("links-list");
